@@ -3,8 +3,8 @@ POST http://localhost:3000/contacts
 Content-Type: application/json
 
 {
-    "firstname":"arman",
-    "lastname":"vh",
+    "firstname":"arash",
+    "lastname":"xw",
     "phonenumber":"+989370001111",
     "email":"example@mail.com"
 }
@@ -15,7 +15,6 @@ GET http://localhost:3000/contacts
 
 ###Find Contact
 GET http://localhost:3000/contacts/3
-
 
 ###Update Contact
 PATCH  http://localhost:3000/contacts/2

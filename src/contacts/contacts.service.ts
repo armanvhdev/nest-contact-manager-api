@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Contact } from './entities/contacts.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateContactDto } from './dtos/create-contact.dto';
 
 @Injectable()
 export class ContactsService {
@@ -9,17 +10,9 @@ export class ContactsService {
     @InjectRepository(Contact) private readonly repo: Repository<Contact>,
   ) {}
 
-  create(
-    firstname: string,
-    lastname: string,
-    phonenumber: string,
-    email: string,
-  ) {
+  create(createContactDto: CreateContactDto) {
     const contact = this.repo.create({
-      firstname,
-      lastname,
-      phonenumber,
-      email,
+      ...createContactDto,
     });
 
     return this.repo.save(contact);
@@ -37,9 +30,12 @@ export class ContactsService {
   }
 
   async update(id: number, attrs: Partial<Contact>) {
-    const contact = await this.repo.findOneBy({ id });
+    const contact = await this.repo.preload({
+      id,
+      ...attrs,
+    });
     if (!contact) throw new NotFoundException('contact not found');
-    Object.assign(contact, attrs);
+    // Object.assign(contact, attrs);
     return await this.repo.save(contact);
   }
 

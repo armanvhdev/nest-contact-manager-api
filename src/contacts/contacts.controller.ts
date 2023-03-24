@@ -17,8 +17,7 @@ export class ContactsController {
 
   @Post()
   createContact(@Body() createContactDto: CreateContactDto) {
-    const { firstname, lastname, phonenumber, email } = createContactDto;
-    return this.contactsService.create(firstname, lastname, phonenumber, email);
+    return this.contactsService.create(createContactDto);
   }
 
   @Get()
