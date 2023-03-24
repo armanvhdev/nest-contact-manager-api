@@ -1,0 +1,33 @@
+###Create Contact
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+    "firstname":"arman",
+    "lastname":"vh",
+    "phonenumber":"+989370001111",
+    "email":"example@mail.com"
+}
+
+###Find All Contacts
+GET http://localhost:3000/contacts
+
+
+###Find Contact
+GET http://localhost:3000/contacts/3
+
+
+###Update Contact
+PATCH  http://localhost:3000/contacts/2
+Content-Type: application/json
+
+{
+    "firstname":"abbas",
+    "lastname":"mv",
+    "phonenumber":"+989370002222",
+    "email":"example@mail.com"
+}
+
+###Remove Contact
+DELETE  http://localhost:3000/contacts/3
+
