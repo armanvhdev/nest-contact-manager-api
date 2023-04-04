@@ -7,7 +7,12 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('/register')
-  createUser(@Body() body: UsersCreateDto) {
+  register(@Body() body: UsersCreateDto) {
     return this.usersService.create(body.username, body.email, body.password);
+  }
+
+  @Post('/login')
+  login(@Body() body: UsersCreateDto) {
+    return this.usersService.find(body);
   }
 }

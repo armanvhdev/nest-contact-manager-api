@@ -1,5 +1,15 @@
-###Create User 
+###Resgister User 
 POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username":"john doe",
+    "email":"example@mail.com",
+    "password":"123456"
+}
+
+###Login User
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {

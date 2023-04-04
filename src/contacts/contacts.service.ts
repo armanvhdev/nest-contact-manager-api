@@ -35,7 +35,6 @@ export class ContactsService {
       ...attrs,
     });
     if (!contact) throw new NotFoundException('contact not found');
-    // Object.assign(contact, attrs);
     return await this.repo.save(contact);
   }
 
