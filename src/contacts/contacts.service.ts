@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Contact } from './entities/contacts.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateContactDto } from './dtos/create-contact.dto';
+import { PaginationQueryDto } from './dtos/pagination-query.dto';
 
 @Injectable()
 export class ContactsService {
@@ -18,8 +19,13 @@ export class ContactsService {
     return this.repo.save(contact);
   }
 
-  find() {
-    return this.repo.find();
+  async find(paginationQuery: PaginationQueryDto) {
+    const { limit, offset } = paginationQuery;
+    const contacts = await this.repo.find({
+      skip: offset,
+      take: limit,
+    });
+    return contacts;
   }
 
   async findOne(id: number) {

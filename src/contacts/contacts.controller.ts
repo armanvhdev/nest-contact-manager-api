@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { CreateContactDto } from './dtos/create-contact.dto';
 import { ContactsService } from './contacts.service';
+import { PaginationQueryDto } from './dtos/pagination-query.dto';
 
 @Controller('contacts')
 export class ContactsController {
@@ -21,8 +22,8 @@ export class ContactsController {
   }
 
   @Get()
-  findAllContacts() {
-    return this.contactsService.find();
+  findAllContacts(@Query() paginationQuery : PaginationQueryDto) {
+    return this.contactsService.find(paginationQuery);
   }
 
   @Get('/:id')
