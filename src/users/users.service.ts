@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/users.entity';
 import { UsersCreateDto } from './dtos/users-create.dto';
+import { comparePassword, encodePassword } from './utils/bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -11,6 +12,7 @@ export class UsersService {
   ) {}
 
   create(username: string, email: string, password: string) {
+    password = encodePassword(password);
     const user = this.repo.create({ username, email, password });
     return this.repo.save(user);
   }
@@ -20,8 +22,8 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('user not found');
     } else {
-      if (user.password == body.password) {
-        return 'successful login ';
+      if (comparePassword) {
+        return true;
       }
     }
   }

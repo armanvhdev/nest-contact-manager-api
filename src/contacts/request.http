@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###Find All Contacts
-GET http://localhost:3000/contacts?limit=6
+GET http://localhost:3000/contacts?limit=3&offset=2
 
 
 ###Find Contact

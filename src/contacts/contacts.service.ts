@@ -21,8 +21,9 @@ export class ContactsService {
 
   async find(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
+
     const contacts = await this.repo.find({
-      skip: offset,
+      skip: (offset - 1) * limit,
       take: limit,
     });
     return contacts;
